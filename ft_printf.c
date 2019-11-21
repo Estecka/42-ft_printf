@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:50:25 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/21 13:04:52 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/21 15:10:22 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,31 @@ static int	printtag(const char **format, va_list args)
 ** Returns the amount of characters printed.
 */
 
+int			ft_vprintf(const char *format, va_list args)
+{
+	int		result;
+
+	if (!format)
+		return (0);
+	result = 0;
+	while (*format)
+		if (*format == '%')
+			result += printtag(&format, args);
+		else
+		{
+			write(1, format++, 1);
+			result += 1;
+		}
+	return (result);
+}
+
 int			ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		result;
-	int		pass;
 
 	va_start(args, format);
-	if (!format)
-		return (0);
-	result = 0;
-	pass = 1;
-	while (pass > 0)
-	{
-		pass = 0;
-		while (*format && *format != '%')
-		{
-			write(1, format, 1);
-			pass += 1;
-			format++;
-		}
-		pass = printtag(&format, args);
-		result += pass;
-		format++;
-	}
+	result = ft_vprintf(format, args);
 	va_end(args);
 	return (result);
 }
