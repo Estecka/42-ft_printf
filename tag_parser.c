@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 15:30:40 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 15:46:30 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,22 @@ static t_writer	pickwriter(t_pftag *tag)
 }
 
 /*
+** Parses a number and sets it as the tag's padding size.
+** Alters the given tag and moves the cursor forward accordingly.
+*/
+
+static void	parsepadding(t_pftag *tag, const char **src)
+{
+	tag->padsize = 0;
+	while (ft_isdigit(**src))
+	{
+		tag->padsize *= 10;
+		tag->padsize += **src - '0';
+		(*src)++;
+	}
+}
+
+/*
 ** Parses the `#-+ 0' section of the tag.
 ** Alters the given tag and moves the cursor forward accordingly.
 */
@@ -60,28 +76,17 @@ static void	parseprefix(t_pftag *tag, const char **src)
 			tag->spaced = 1;
 		else if (**src == '0')
 			tag->zeroed = 1;
+		else if (ft_isdigit(**src))
+			parsepadding(tag, src);
 		else
-			return ;
+		{
+			tag->type = **src;
+			if (**src)
+				(*src)++;
+			return;
+		}
 		(*src)++;
 	}
-}
-
-/*
-** Parses the pad-size and type section of the tag.
-** Alters the given tag and moves the cursor forward accordingly.
-*/
-
-static void	parsesuffix(t_pftag *tag, const char **src)
-{
-	while (ft_isdigit(**src))
-	{
-		tag->padsize *= 10;
-		tag->padsize += **src - '0';
-		(*src)++;
-	}
-	tag->type = **src;
-	if (**src)
-		(*src)++;
 }
 
 /*
@@ -95,7 +100,6 @@ void		parsetag(const char **src, t_pftag *tag)
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
 	parseprefix(tag, src);
-	parsesuffix(tag, src);
 	tag->writer = pickwriter(tag);
 	if (!tag->writer)
 	{
