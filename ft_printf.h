@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 14:31:25 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 17:37:12 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,20 @@ struct		s_pftag
 
 	int				padsize;
 
-	unsigned short	minused: 1;
 	unsigned short	sharped: 1;
+	unsigned short	minused: 1;
 	unsigned short	plused : 1;
 	unsigned short	spaced : 1;
 	unsigned short	zeroed : 1;
 };
 
 void		parsetag(const char **format, t_pftag *tag);
+
+void		initbuffer(t_pftag *tag);
+void		prefixtotag(t_pftag *tag, const char *prefix);
+void		writetotag(t_pftag *tag, char c);
+void		flushtag(t_pftag *tag);
+
+int			w_string(t_pftag *tag, va_list args);
 
 #endif

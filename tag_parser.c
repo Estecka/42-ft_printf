@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 15:58:56 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 17:37:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,13 @@ static int		w_unsupported(t_pftag *tag, va_list args)
 
 static t_writer	pickwriter(t_pftag *tag)
 {
-	(void)tag;
-	return (NULL);
+	char c;
+
+	c = tag->type;
+	if (c == 's')
+		return (w_string);
+	else
+		return (NULL);
 }
 
 /*
