@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:49:56 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 11:25:56 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 12:15:34 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	writetag(t_pftag *tag, char c)
 static int	w_unsupported(t_pftag *tag, va_list args)
 {
 	(void)args;
-	write(1, &tag->type, 1);
+	write(1, tag->src, 1);
 	return (1);
 }
 

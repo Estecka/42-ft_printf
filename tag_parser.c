@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 11:46:51 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 12:12:35 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	parsetag(const char **src, t_pftag *tag)
 
 	supported = "s";
 	ft_bzero(tag, sizeof(t_pftag));
+	tag->src = *src;
 	tag->type = ft_strcontain(supported, **src) ? **src : 0;
 	(*src)++;
 }

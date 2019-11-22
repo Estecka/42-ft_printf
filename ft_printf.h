@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 11:38:26 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 12:13:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef int	(*t_writer)(t_pftag*, va_list);
 
 struct		s_pftag
 {
-	char			*src;
+	const char		*src;
 	char			*buffer;
 	char			*limit;
 	char			*cursor;
