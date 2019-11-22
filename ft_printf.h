@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 12:13:56 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 14:31:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ struct		s_pftag
 };
 
 void		parsetag(const char **format, t_pftag *tag);
-t_writer	pickwriter(t_pftag *tag);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:49:56 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 12:15:34 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 14:30:41 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,4 @@ void	writetag(t_pftag *tag, char c)
 	tag->cursor++;
 	if (tag->cursor < tag->limit)
 		flushtag(tag);
-}
-
-/*
-** Default writer for invalid tags.
-*/
-
-static int	w_unsupported(t_pftag *tag, va_list args)
-{
-	(void)args;
-	write(1, tag->src, 1);
-	return (1);
-}
-
-/*
-** Returns the appropriate method to write the given tag.
-**
-** The returned method's prototype will is `int (t_pftag, va_list)`
-** It moves the va_list forward as required by the tag,
-** and returns the amount of characters printed.
-*/
-
-t_writer	pickwriter(t_pftag *tag)
-{
-	(void)tag;
-	return (w_unsupported);
 }
