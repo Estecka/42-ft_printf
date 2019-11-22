@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:50:25 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/21 16:37:05 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 11:03:13 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int			ft_vprintf(const char *format, va_list args)
 {
 	int			result;
 	t_pftag		tag;
-	t_writer	writer;
 
 	if (!format)
 		return (0);
@@ -34,9 +33,9 @@ int			ft_vprintf(const char *format, va_list args)
 		if (*format == '%')
 		{
 			format++;
-			tag = parsetag(&format);
-			writer = pickwriter(tag);
-			result += writer(tag, args);
+			parsetag(&format, &tag);
+			tag.writer = pickwriter(&tag);
+			result += tag.writer(&tag, args);
 		}
 		else
 		{
