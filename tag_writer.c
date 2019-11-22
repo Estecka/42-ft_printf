@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:49:56 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 14:30:41 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 15:55:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** Prints the tag's buffer on screen, and discards it.
 */
 
-void 	flushtag(t_pftag *tag)
+void	flushtag(t_pftag *tag)
 {
 	char *cursor;
 

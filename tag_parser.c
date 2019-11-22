@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 15:46:30 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/22 15:58:56 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** Default writer for invalid tags.
 */
 
-static int	w_unsupported(t_pftag *tag, va_list args)
+static int		w_unsupported(t_pftag *tag, va_list args)
 {
 	(void)args;
 	write(1, tag->src, 1);
@@ -46,7 +46,7 @@ static t_writer	pickwriter(t_pftag *tag)
 ** Alters the given tag and moves the cursor forward accordingly.
 */
 
-static void	parsepadding(t_pftag *tag, const char **src)
+static void		parsepadding(t_pftag *tag, const char **src)
 {
 	tag->padsize = 0;
 	while (ft_isdigit(**src))
@@ -62,7 +62,7 @@ static void	parsepadding(t_pftag *tag, const char **src)
 ** Alters the given tag and moves the cursor forward accordingly.
 */
 
-static void	parseprefix(t_pftag *tag, const char **src)
+static void		parseprefix(t_pftag *tag, const char **src)
 {
 	while (**src)
 	{
@@ -83,7 +83,7 @@ static void	parseprefix(t_pftag *tag, const char **src)
 			tag->type = **src;
 			if (**src)
 				(*src)++;
-			return;
+			return ;
 		}
 		(*src)++;
 	}
@@ -95,7 +95,7 @@ static void	parseprefix(t_pftag *tag, const char **src)
 ** If the tag is invalid, `src` is only moved by one.
 */
 
-void		parsetag(const char **src, t_pftag *tag)
+void			parsetag(const char **src, t_pftag *tag)
 {
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
