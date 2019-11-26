@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:17:57 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 11:22:00 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 12:31:09 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ int	w_string(t_pftag *tag, va_list args)
 
 	count = 0;
 	arg = va_arg(args, char*);
+	initbuffer(tag);
 	while (*arg)
 	{
-		writeright(tag, *arg);
+		count += writeright(tag, *arg);
 		arg++;
-		count++;
 	}
+	count += flushtag(tag);
 	return (count);
 }

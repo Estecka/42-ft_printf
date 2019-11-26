@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 11:30:47 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 12:25:06 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ struct		s_pftag
 void		parsetag(const char **format, t_pftag *tag);
 
 void		initbuffer(t_pftag *tag);
-void		writeleft(t_pftag *tag, char c);
-void		writeright(t_pftag *tag, char c);
-void		flushtag(t_pftag *tag);
+int			writeleft(t_pftag *tag, char c);
+int			writeright(t_pftag *tag, char c);
+int			flushtag(t_pftag *tag);
 
 int			w_string(t_pftag *tag, va_list args);
 
