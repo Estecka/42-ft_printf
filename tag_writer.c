@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:49:56 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 12:31:53 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 12:55:16 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void				initbuffer(t_pftag *tag)
 		return ;
 	ft_memset(tag->buffer, tag->zeroed ? '0' : ' ', size);
 	tag->buffer[size] = '\0';
-	tag->lcursor = tag->buffer + (size - 1);
-	tag->rcursor = tag->buffer;
+	tag->rcursor = tag->buffer + (size - 1);
+	tag->lcursor = tag->buffer;
 }
 
 /*
