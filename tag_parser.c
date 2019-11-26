@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 11:35:31 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 11:52:35 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static t_writer	pickwriter(t_pftag *tag)
 
 /*
 ** Parses a number and sets it as the tag's padding size.
-** Alters the given tag and moves the cursor forward accordingly.
+** Alters the given tag accordingly.
+** Leaves the cursor onto the last digit.
 */
 
 static void		parsepadding(t_pftag *tag, const char **src)
@@ -60,6 +61,7 @@ static void		parsepadding(t_pftag *tag, const char **src)
 		tag->padsize += **src - '0';
 		(*src)++;
 	}
+	(*src)--;
 }
 
 /*
