@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 11:52:35 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 14:19:41 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static t_writer	pickwriter(t_pftag *tag)
 	c = tag->type;
 	if (c == 's')
 		return (w_string);
+	if (c == 'c')
+		return (w_character);
 	else
 		return (NULL);
 }
