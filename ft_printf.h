@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 14:20:25 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 14:49:07 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ int			flushtag(t_pftag *tag);
 
 int			w_string(t_pftag *tag, va_list args);
 int			w_character(t_pftag *tag, va_list args);
-
+int			w_deci(t_pftag *tag, va_list args);
+int			w_hexa(t_pftag *tag, va_list args);
+int			w_hexaup(t_pftag *tag, va_list args);
+int			w_octa(t_pftag *tag, va_list args);
+int			w_pointer(t_pftag *tag, va_list args);
 #endif
