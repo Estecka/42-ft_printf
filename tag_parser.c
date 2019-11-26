@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 17:37:47 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/26 11:35:31 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		w_unsupported(t_pftag *tag, va_list args)
 /*
 ** Returns the appropriate method to write the given tag type.
 **
-** The returned method's prototype will is `int (t_pftag*, va_list)`
+** The returned method's prototype will be `int (t_pftag*, va_list)`
 ** It moves the va_list forward as required by the tag,
 ** and returns the amount of characters printed.
 ** NULL is returned if the tag type is not supported.
@@ -67,7 +67,7 @@ static void		parsepadding(t_pftag *tag, const char **src)
 ** Alters the given tag and moves the cursor forward accordingly.
 */
 
-static void		parseprefix(t_pftag *tag, const char **src)
+static void		parseflags(t_pftag *tag, const char **src)
 {
 	while (**src)
 	{
@@ -96,6 +96,7 @@ static void		parseprefix(t_pftag *tag, const char **src)
 
 /*
 ** Builds a pftag object after the given string.
+** Disable incompatible tags when applicable.
 ** Moves `src` forward until the first caracter after the tag.
 ** If the tag is invalid, `src` is only moved by one.
 */
@@ -104,7 +105,11 @@ void			parsetag(const char **src, t_pftag *tag)
 {
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
-	parseprefix(tag, src);
+	parseflags(tag, src);
+	if (tag->plused)
+		tag->spaced = 0;
+	if (tag->minused)
+		tag->zeroed = 0;
 	tag->writer = pickwriter(tag);
 	if (!tag->writer)
 	{
