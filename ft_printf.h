@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 14:49:07 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/27 17:32:57 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			ft_printf(const char *format, ...);
 ** Internals
 */
 
+typedef unsigned int	t_uint;
 typedef struct s_pftag	t_pftag;
 typedef int	(*t_writer)(t_pftag*, va_list);
 
@@ -31,6 +32,7 @@ struct		s_pftag
 	char			*buffer;
 	char			*lcursor;
 	char			*rcursor;
+	int				(*printer)(t_pftag*, char);
 
 	char			type;
 	t_writer		writer;
@@ -51,9 +53,12 @@ int			writeleft(t_pftag *tag, char c);
 int			writeright(t_pftag *tag, char c);
 int			flushtag(t_pftag *tag);
 
+int			w_intbase(t_pftag *tag, va_list args, const char *base, short uint);
+
 int			w_string(t_pftag *tag, va_list args);
 int			w_character(t_pftag *tag, va_list args);
 int			w_deci(t_pftag *tag, va_list args);
+int			w_udeci(t_pftag *tag, va_list args);
 int			w_hexa(t_pftag *tag, va_list args);
 int			w_hexaup(t_pftag *tag, va_list args);
 int			w_octa(t_pftag *tag, va_list args);

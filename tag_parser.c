@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 14:19:41 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/27 17:29:23 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ static t_writer	pickwriter(t_pftag *tag)
 		return (w_string);
 	if (c == 'c')
 		return (w_character);
+	if (c == 'd')
+		return (w_deci);
+	if (c == 'u')
+		return (w_udeci);
+	if (c == 'o')
+		return (w_octa);
+	if (c == 'x')
+		return (w_hexa);
+	if (c == 'X')
+		return (w_hexaup);
 	else
 		return (NULL);
 }
@@ -115,6 +125,7 @@ void			parsetag(const char **src, t_pftag *tag)
 	if (tag->minused)
 		tag->zeroed = 0;
 	tag->writer = pickwriter(tag);
+	tag->printer = tag->minused ? writeleft : writeright;
 	if (!tag->writer)
 	{
 		tag->writer = w_unsupported;
