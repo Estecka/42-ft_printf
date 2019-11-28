@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:50:38 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/27 14:53:12 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/28 12:39:08 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	w_udeci(t_pftag *tag, va_list args)
 
 int	w_octa(t_pftag *tag, va_list args)
 {
-	return (w_intbase(tag, args, "012345678", 1));
+	return (w_intbase(tag, args, "01234567", 1));
 }
 
 int	w_hexa(t_pftag *tag, va_list args)
