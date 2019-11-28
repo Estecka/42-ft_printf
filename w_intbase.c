@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:58:44 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/28 12:44:22 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/28 13:03:08 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			w_intbase(t_pftag *tag, va_list args, const char *base, short uint)
 	arg = va_arg(args, int);
 	initbuffer(tag);
 	if (!uint && arg < 0)
-		tag->printer(tag, '-');
+		result += (tag->zeroed ? writeleft : tag->printer)(tag, '-');
 	if (uint)
 		result += uintbaserec(tag, (unsigned int)arg, base, ft_strlen(base));
 	else
