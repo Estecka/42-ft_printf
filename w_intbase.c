@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:58:44 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/27 17:48:36 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/28 12:09:44 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	intbaserec(t_pftag *tag, int value, const char *base, int dozen)
 	result = 0;
 	if (value <= -dozen || dozen <= value)
 		result += intbaserec(tag, value / dozen, base, dozen);
-	digit = (value < 0 ? -value : value) % dozen;
+	digit = (value < 0) ? -(value % dozen) : (value % dozen);
 	c = base[digit];
 	result += tag->printer(tag, c);
 	return (result);
@@ -37,7 +37,7 @@ static int	uintbaserec(t_pftag *tag, t_uint value, const char *base, int dozen)
 
 	result = 0;
 	if ((unsigned int)dozen <= value)
-		result += intbaserec(tag, value / dozen, base, dozen);
+		result += uintbaserec(tag, value / dozen, base, dozen);
 	digit = value % 10;
 	c = base[digit];
 	result += tag->printer(tag, c);
