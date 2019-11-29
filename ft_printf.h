@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/28 15:20:28 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:39:44 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef unsigned int	t_uint;
 typedef unsigned long	t_ulong;
 
 typedef struct s_pftag	t_pftag;
-typedef int	(*t_writer)(t_pftag*, va_list);
+typedef int	(*t_writer)(t_pftag*);
 
 struct		s_pftag
 {
@@ -39,6 +39,8 @@ struct		s_pftag
 	char			type;
 	t_writer		writer;
 
+	long			argument;
+
 	int				padsize;
 
 	unsigned short	sharped: 1;
@@ -48,21 +50,22 @@ struct		s_pftag
 	unsigned short	zeroed : 1;
 };
 
-void		parsetag(const char **format, t_pftag *tag);
+void		parsetag(const char **format, t_pftag *tag, va_list args);
 
 void		initbuffer(t_pftag *tag);
 int			writeleft(t_pftag *tag, char c);
 int			writeright(t_pftag *tag, char c);
 int			flushtag(t_pftag *tag);
 
-int			w_intbase(t_pftag *tag, va_list args, const char *base, short uint);
+int			w_intbase(t_pftag *tag, const char *base, short uint);
 
-int			w_string(t_pftag *tag, va_list args);
-int			w_character(t_pftag *tag, va_list args);
-int			w_deci(t_pftag *tag, va_list args);
-int			w_udeci(t_pftag *tag, va_list args);
-int			w_hexa(t_pftag *tag, va_list args);
-int			w_hexaup(t_pftag *tag, va_list args);
-int			w_octa(t_pftag *tag, va_list args);
-int			w_pointer(t_pftag *tag, va_list args);
+int			w_unsupported(t_pftag *tag);
+int			w_string(t_pftag *tag);
+int			w_character(t_pftag *tag);
+int			w_deci(t_pftag *tag);
+int			w_udeci(t_pftag *tag);
+int			w_hexa(t_pftag *tag);
+int			w_hexaup(t_pftag *tag);
+int			w_octa(t_pftag *tag);
+int			w_pointer(t_pftag *tag);
 #endif

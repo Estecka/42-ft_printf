@@ -6,20 +6,20 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:17:57 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 17:28:33 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:33:36 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int	w_string(t_pftag *tag, va_list args)
+int	w_string(t_pftag *tag)
 {
 	char	*arg;
 	int		count;
 
 	count = 0;
-	arg = va_arg(args, char*);
+	arg = (char*)tag->argument;
 	initbuffer(tag);
 	if (!arg)
 		arg = "(null)";

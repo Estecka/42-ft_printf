@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 19:57:10 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:36:09 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft/libft.h"
 
 #include <unistd.h>
+#include <stdarg.h>
 
 /*
 ** Returns the appropriate method to write the given tag type.
@@ -102,11 +103,12 @@ static void		parseflags(t_pftag *tag, const char **src)
 /*
 ** Builds a pftag object after the given string.
 ** Disable incompatible tags when applicable.
+** Moves the arguments forward as needed.
 ** Moves `src` forward until the first caracter after the tag.
 ** If the tag is invalid, `src` is only moved by one.
 */
 
-void			parsetag(const char **src, t_pftag *tag)
+void			parsetag(const char **src, t_pftag *tag, va_list args)
 {
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
@@ -123,4 +125,6 @@ void			parsetag(const char **src, t_pftag *tag)
 		tag->type = 0;
 		*src = tag->src + 1;
 	}
+	else
+		tag->argument = va_arg(args, long);
 }

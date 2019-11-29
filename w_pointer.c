@@ -6,14 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 15:12:07 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 18:26:58 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:41:01 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-int	w_pointer(t_pftag *tag, va_list args)
+int	w_pointer(t_pftag *tag)
 {
-	return (w_intbase(tag, args, "0123456789abcdef", 1));
+	return (w_intbase(tag, "0123456789abcdef", 1));
 }

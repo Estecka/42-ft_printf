@@ -6,15 +6,17 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 19:57:11 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 19:59:20 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:41:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdarg.h>
 
-int		w_unsupported(t_pftag *tag, va_list args)
+#include "ft_printf.h"
+
+int		w_unsupported(t_pftag *tag)
 {
-	(void)args;
 	write(1, tag->src, 1);
 	return (1);
 }

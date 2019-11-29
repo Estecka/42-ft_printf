@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:58:44 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 18:32:31 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:31:15 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ static int	uintbaserec(t_pftag *tag, t_ulong value, const char *base, int ten)
 	return (count);
 }
 
-int			w_intbase(t_pftag *tag, va_list args, const char *base, short uint)
+int			w_intbase(t_pftag *tag, const char *base, short uint)
 {
 	long	arg;
 	int		count;
 
 	count = 0;
-	arg = va_arg(args, long);
+	arg = tag->argument;
 	arg = subcast(arg, tag->type);
 	initbuffer(tag);
 	count += addprefix(tag, arg, uint);

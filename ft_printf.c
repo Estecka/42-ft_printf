@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:50:25 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/28 14:39:33 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 20:29:24 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int			ft_vprintf(const char *format, va_list args)
 		{
 			if (*++format)
 			{
-				parsetag(&format, &tag);
-				result += tag.writer(&tag, args);
+				parsetag(&format, &tag, args);
+				result += tag.writer(&tag);
 			}
 		}
 		else
