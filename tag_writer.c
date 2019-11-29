@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:49:56 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 12:55:16 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 18:45:15 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void				initbuffer(t_pftag *tag)
 
 int					flushtag(t_pftag *tag)
 {
+	int		i;
 	int		result;
-	char	*cursor;
 
 	result = 0;
-	cursor = tag->buffer;
-	if (cursor)
+	if (tag->buffer)
 	{
-		while (*cursor)
+		i = -1;
+		while (++i < tag->padsize)
 		{
-			write(1, cursor++, 1);
+			write(1, tag->buffer + i, 1);
 			result += 1;
 		}
 		free(tag->buffer);
