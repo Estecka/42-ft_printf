@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/28 15:07:37 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 19:57:10 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 #include "libft/libft.h"
 
 #include <unistd.h>
-
-/*
-** Default writer for invalid tags.
-*/
-
-static int		w_unsupported(t_pftag *tag, va_list args)
-{
-	(void)args;
-	write(1, tag->src, 1);
-	return (1);
-}
 
 /*
 ** Returns the appropriate method to write the given tag type.
