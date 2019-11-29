@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:58:44 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 13:07:13 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 18:32:31 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ static int	intbaserec(t_pftag *tag, long value, const char *base, int dozen)
 	return (count);
 }
 
-static int	uintbaserec(t_pftag *tag, t_ulong value, const char *base, int dozen)
+static int	uintbaserec(t_pftag *tag, t_ulong value, const char *base, int ten)
 {
 	unsigned char	digit;
 	int				count;
 
 	count = 0;
-	if ((unsigned int)dozen <= value)
-		count += uintbaserec(tag, value / dozen, base, dozen);
-	digit = base[value % dozen];
+	if ((unsigned int)ten <= value)
+		count += uintbaserec(tag, value / ten, base, ten);
+	digit = base[value % ten];
 	count += tag->printer(tag, digit);
 	return (count);
 }
