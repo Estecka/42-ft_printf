@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:17:57 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/26 13:00:54 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/29 17:28:33 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	w_string(t_pftag *tag, va_list args)
 	count = 0;
 	arg = va_arg(args, char*);
 	initbuffer(tag);
+	if (!arg)
+		arg = "(null)";
 	while (*arg)
 	{
 		count += tag->minused ?
