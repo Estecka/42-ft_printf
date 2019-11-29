@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/27 17:29:23 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/28 15:07:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_writer	pickwriter(t_pftag *tag)
 		return (w_string);
 	if (c == 'c')
 		return (w_character);
-	if (c == 'd')
+	if (c == 'd' || c == 'i')
 		return (w_deci);
 	if (c == 'u')
 		return (w_udeci);
@@ -54,6 +54,8 @@ static t_writer	pickwriter(t_pftag *tag)
 		return (w_hexa);
 	if (c == 'X')
 		return (w_hexaup);
+	if (c == 'p')
+		return (w_pointer);
 	else
 		return (NULL);
 }

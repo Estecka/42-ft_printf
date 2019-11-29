@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/27 17:32:57 by abaur            ###   ########.fr       */
+/*   Updated: 2019/11/28 15:20:28 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int			ft_printf(const char *format, ...);
 */
 
 typedef unsigned int	t_uint;
+typedef unsigned long	t_ulong;
+
 typedef struct s_pftag	t_pftag;
 typedef int	(*t_writer)(t_pftag*, va_list);
 
