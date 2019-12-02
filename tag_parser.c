@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 20:36:09 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 12:21:21 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@
 ** NULL is returned if the tag type is not supported.
 */
 
-static t_writer	pickwriter(t_pftag *tag)
+static t_writer	pickwriter(char c)
 {
-	char c;
-
-	c = tag->type;
 	if (c == 's')
 		return (w_string);
 	if (c == 'c')
@@ -51,21 +48,24 @@ static t_writer	pickwriter(t_pftag *tag)
 }
 
 /*
-** Parses a number and sets it as the tag's padding size.
-** Alters the given tag accordingly.
-** Leaves the cursor onto the last digit.
+** Parses a number and returns it.
+** Leaves the cursor onto the last digit,
+** or moves it backward if no digits was parsed.
 */
 
-static void		parsepadding(t_pftag *tag, const char **src)
+static int		parsenbr(const char **src)
 {
-	tag->padsize = 0;
+	int	result;
+
+	result = 0;
 	while (ft_isdigit(**src))
 	{
-		tag->padsize *= 10;
-		tag->padsize += **src - '0';
+		result *= 10;
+		result += **src - '0';
 		(*src)++;
 	}
 	(*src)--;
+	return (result);
 }
 
 /*
@@ -88,14 +88,11 @@ static void		parseflags(t_pftag *tag, const char **src)
 		else if (**src == '0')
 			tag->zeroed = 1;
 		else if (ft_isdigit(**src))
-			parsepadding(tag, src);
+			tag->padsize = parsenbr(src);
+		else if (**src == '.' && ft_isdigit((*src)[1]))
+			tag->precision = parsenbr((*src)++ ? src : src);
 		else
-		{
-			tag->type = **src;
-			if (**src)
-				(*src)++;
-			return ;
-		}
+			return (void)(tag->type = **src ? *((*src)++) : **src);
 		(*src)++;
 	}
 }
@@ -117,7 +114,7 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 		tag->spaced = 0;
 	if (tag->minused)
 		tag->zeroed = 0;
-	tag->writer = pickwriter(tag);
+	tag->writer = pickwriter(tag->type);
 	tag->printer = tag->minused ? writeleft : writeright;
 	if (!tag->writer)
 	{

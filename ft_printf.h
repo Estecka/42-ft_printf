@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 20:39:44 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 10:49:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct		s_pftag
 	long			argument;
 
 	int				padsize;
+	int				precision;
 
 	unsigned short	sharped: 1;
 	unsigned short	minused: 1;
