@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:17:57 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 20:33:36 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 13:41:28 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	w_string(t_pftag *tag)
 		arg = "(null)";
 	while (*arg)
 	{
-		count += tag->minused ?
-			writeleft(tag, *arg) :
-			writeright(tag, *arg);
+		count += tag->printer(tag, *arg);
 		arg++;
 	}
 	count += flushtag(tag);

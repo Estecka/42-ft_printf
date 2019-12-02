@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 12:21:21 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 13:38:47 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ static t_writer	pickwriter(char c)
 }
 
 /*
-** Parses a number and returns it.
-** Leaves the cursor onto the last digit,
+** Parses a positive number and returns it.
+** Leaves the cursor onto the last character parsed,
 ** or moves it backward if no digits was parsed.
+** Returns -2 if the first digit is '*'.
 */
 
 static int		parsenbr(const char **src)
@@ -89,8 +90,8 @@ static void		parseflags(t_pftag *tag, const char **src)
 			tag->zeroed = 1;
 		else if (ft_isdigit(**src))
 			tag->padsize = parsenbr(src);
-		else if (**src == '.' && ft_isdigit((*src)[1]))
-			tag->precision = parsenbr((*src)++ ? src : src);
+		else if (**src == '.')
+			tag->precision = (*(++*src) == '*') ? -2 : parsenbr(src);
 		else
 			return (void)(tag->type = **src ? *((*src)++) : **src);
 		(*src)++;
@@ -109,6 +110,7 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 {
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
+	tag->precision = -1;
 	parseflags(tag, src);
 	if (tag->plused)
 		tag->spaced = 0;
@@ -116,6 +118,8 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 		tag->zeroed = 0;
 	tag->writer = pickwriter(tag->type);
 	tag->printer = tag->minused ? writeleft : writeright;
+	if (tag->precision == -2)
+		tag->precision = (int)va_arg(args, long);
 	if (!tag->writer)
 	{
 		tag->writer = w_unsupported;
