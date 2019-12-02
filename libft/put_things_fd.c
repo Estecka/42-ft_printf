@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_things.c                                       :+:      :+:    :+:   */
+/*   put_things_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 16:12:37 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 16:58:12 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 16:56:25 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-void	ft_putchar(char c)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(1, &c, 1);
+	write(fd, &c, 1);
 }
 
-void	ft_putstr(const char *s)
-{
-	if (s)
-		while (*s)
-			write(1, s++, 1);
-}
-
-void	ft_putendl(const char *s)
+void	ft_putstr_fd(const char *s, int fd)
 {
 	if (s)
 		while (*s)
-			write(1, s++, 1);
-	write(1, "\n", 1);
+			write(fd, s++, 1);
 }
 
-void	ft_putnbr(int n)
+void	ft_putendl_fd(const char *s, int fd)
+{
+	if (s)
+		while (*s)
+			write(fd, s++, 1);
+	write(fd, "\n", 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	c;
 
 	if (n <= -10 || 10 <= n)
-		ft_putnbr(n / 10);
+		ft_putnbr_fd(n / 10, fd);
 	else if (n < 0)
-		write(1, "-", 1);
+		write(fd, "-", 1);
 	n %= 10;
 	c = '0' + (n < 0 ? -n : n);
-	write(1, &c, 1);
+	write(fd, &c, 1);
 }

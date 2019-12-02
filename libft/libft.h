@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 11:43:50 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/22 17:13:18 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 17:06:09 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+
+void	ft_putchar(char c);
+void	ft_putstr(const char *s);
+void	ft_putendl(const char *s);
+void	ft_putnbr(int n);
 
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(const char *s, int fd);
