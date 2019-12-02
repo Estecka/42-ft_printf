@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 13:38:47 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 14:28:40 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 		tag->precision = (int)va_arg(args, long);
 	if (!tag->writer)
 	{
-		tag->writer = w_unsupported;
+		tag->writer = w_character;
+		tag->argument = tag->type;
 		tag->type = 0;
-		*src = tag->src + 1;
 	}
 	else
 		tag->argument = va_arg(args, long);

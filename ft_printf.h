@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 10:49:40 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/02 14:29:30 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int			flushtag(t_pftag *tag);
 
 int			w_intbase(t_pftag *tag, const char *base, short uint);
 
-int			w_unsupported(t_pftag *tag);
 int			w_string(t_pftag *tag);
 int			w_character(t_pftag *tag);
 int			w_deci(t_pftag *tag);
