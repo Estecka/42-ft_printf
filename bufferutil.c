@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 15:46:02 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 17:34:06 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/03 13:01:37 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,26 @@ static inline int	autoflush(t_buffer *buffer)
 		return (0);
 }
 
-t_buffer 			*newbuffer(size_t capacity, char content)
+t_buffer			*newbuffer(size_t capacity, char content)
 {
 	t_buffer	*buffer;
-	char		*cursor;
 
 	buffer = malloc(sizeof(t_buffer) + ((capacity + 1) * sizeof(char)));
 	if (!buffer)
 		return (NULL);
 	buffer->capacity = capacity;
 	buffer->flushmethod = ft_putchar;
-	buffer->content = capacity ? (char*)(&buffer[1]) : NULL;
+	buffer->content = capacity ? (char*)(buffer + 1) : NULL;
 	buffer->lcursor = buffer->content;
-	buffer->rcursor = &buffer->content[capacity];
-	ft_memset(buffer->content, capacity, content);
-	buffer->content[capacity] = '\0';
+	buffer->rcursor = capacity ? &buffer->content[capacity - 1] : NULL;
+	ft_memset(buffer->content, content, capacity);
+	if (buffer->content)
+		buffer->content[capacity] = '\0';
 	return (buffer);
 }
 
 int					flushbuffer(t_buffer *buffer)
 {
-	int		result;
 	size_t	i;
 
 	if (!buffer->capacity)
@@ -60,7 +59,7 @@ int					flushbuffer(t_buffer *buffer)
 	buffer->lcursor = NULL;
 	buffer->rcursor = NULL;
 	ft_bzero(buffer->content, buffer->capacity);
-	return (result);
+	return (i);
 }
 
 int					buffaddl(t_buffer *buffer, char value)
@@ -79,7 +78,7 @@ int					buffaddr(t_buffer *buffer, char value)
 {
 	char	*cursor;
 
-	if (!buffer->rcursor)
+	if (!buffer->capacity)
 	{
 		buffer->flushmethod(value);
 		return (1);

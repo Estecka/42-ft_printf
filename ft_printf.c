@@ -6,13 +6,14 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 14:50:25 by abaur             #+#    #+#             */
-/*   Updated: 2019/11/29 20:29:24 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/03 12:01:45 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
 
+#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
 
@@ -36,6 +37,9 @@ int			ft_vprintf(const char *format, va_list args)
 			{
 				parsetag(&format, &tag, args);
 				result += tag.writer(&tag);
+				if (tag.buffer)
+					free(tag.buffer);
+				tag.buffer = NULL;
 			}
 		}
 		else

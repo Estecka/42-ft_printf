@@ -6,12 +6,13 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 14:28:40 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/03 12:48:46 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
+#include "bufferutil.h"
 
 #include <unistd.h>
 #include <stdarg.h>
@@ -116,8 +117,9 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 		tag->spaced = 0;
 	if (tag->minused)
 		tag->zeroed = 0;
+	tag->buffer = newbuffer(tag->padsize, tag->zeroed ? '0' : ' ');
 	tag->writer = pickwriter(tag->type);
-	tag->printer = tag->minused ? writeleft : writeright;
+	tag->printer = tag->minused ? buffaddl : buffaddr;
 	if (tag->precision == -2)
 		tag->precision = (int)va_arg(args, long);
 	if (!tag->writer)

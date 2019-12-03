@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:23:51 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 14:29:30 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/03 11:31:49 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
+
+# include "bufferutil.h"
 
 int			ft_vprintf(const char *format, va_list args);
 int			ft_printf(const char *format, ...);
@@ -31,16 +33,13 @@ typedef int	(*t_writer)(t_pftag*);
 struct		s_pftag
 {
 	const char		*src;
-	char			*buffer;
-	char			*lcursor;
-	char			*rcursor;
-	int				(*printer)(t_pftag*, char);
+	t_buffer		*buffer;
+	int				(*printer)(t_buffer*, char);
 
 	char			type;
 	t_writer		writer;
 
 	long			argument;
-
 	int				padsize;
 	int				precision;
 
@@ -52,11 +51,6 @@ struct		s_pftag
 };
 
 void		parsetag(const char **format, t_pftag *tag, va_list args);
-
-void		initbuffer(t_pftag *tag);
-int			writeleft(t_pftag *tag, char c);
-int			writeright(t_pftag *tag, char c);
-int			flushtag(t_pftag *tag);
 
 int			w_intbase(t_pftag *tag, const char *base, short uint);
 

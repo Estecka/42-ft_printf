@@ -6,19 +6,19 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 15:46:23 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/02 17:09:38 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/03 12:03:14 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFFERUTIL_H
 # define BUFFERUTIL_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 typedef struct s_buffer	t_buffer;
 struct		s_buffer
 {
-	int		capacity;
+	size_t	capacity;
 	void	(*flushmethod)(char c);
 
 	char	*content;
