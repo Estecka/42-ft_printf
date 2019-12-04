@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/04 14:36:46 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/04 15:34:17 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,11 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 	tag->src = *src;
 	tag->precision = -1;
 	parseflags(tag, src, args);
+	if (tag->padsize < 0)
+	{
+		tag->padsize *= -1;
+		tag->minused = 1;
+	}
 	if (tag->plused)
 		tag->spaced = 0;
 	if (tag->minused)
