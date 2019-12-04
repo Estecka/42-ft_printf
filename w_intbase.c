@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:58:44 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/03 15:23:06 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/04 14:59:26 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,15 @@ int			w_intbase(t_pftag *tag, const char *base, short uint)
 	count = 0;
 	arg = tag->argument;
 	arg = subcast(arg, tag->type);
-	count += addprefix(tag, arg, uint);
 	pcsn = tag->precision;
 	if (tag->precision < 0)
 		tag->precision = 1;
+	else
+	{
+		ft_memset(tag->buffer->content, ' ', tag->buffer->capacity);
+		tag->zeroed = 0;
+	}
+	count += addprefix(tag, arg, uint);
 	if (uint)
 		count += uintbaserec(tag, (unsigned long)arg, base, ft_strlen(base));
 	else
