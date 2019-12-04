@@ -6,7 +6,7 @@
 /*   By: abaur <abaur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 15:33:49 by abaur             #+#    #+#             */
-/*   Updated: 2019/12/03 12:48:46 by abaur            ###   ########.fr       */
+/*   Updated: 2019/12/04 14:36:46 by abaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,16 @@ static t_writer	pickwriter(char c)
 ** Parses a positive number and returns it.
 ** Leaves the cursor onto the last character parsed,
 ** or moves it backward if no digits was parsed.
-** Returns -2 if the first digit is '*'.
+** If the string is '*', an argument from the va_list is returned instead.
 */
 
-static int		parsenbr(const char **src)
+static int		parsenbr(const char **src, va_list args)
 {
 	int	result;
 
 	result = 0;
+	if (**src == '*')
+		return (int)va_arg(args, long);
 	while (ft_isdigit(**src))
 	{
 		result *= 10;
@@ -75,7 +77,7 @@ static int		parsenbr(const char **src)
 ** Alters the given tag and moves the cursor forward accordingly.
 */
 
-static void		parseflags(t_pftag *tag, const char **src)
+static void		parseflags(t_pftag *tag, const char **src, va_list args)
 {
 	while (**src)
 	{
@@ -89,10 +91,13 @@ static void		parseflags(t_pftag *tag, const char **src)
 			tag->spaced = 1;
 		else if (**src == '0')
 			tag->zeroed = 1;
-		else if (ft_isdigit(**src))
-			tag->padsize = parsenbr(src);
+		else if (**src == '*' || ft_isdigit(**src))
+			tag->padsize = parsenbr(src, args);
 		else if (**src == '.')
-			tag->precision = (*(++*src) == '*') ? -2 : parsenbr(src);
+		{
+			(*src)++;
+			tag->precision = parsenbr(src, args);
+		}
 		else
 			return (void)(tag->type = **src ? *((*src)++) : **src);
 		(*src)++;
@@ -112,7 +117,7 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 	ft_bzero(tag, sizeof(t_pftag));
 	tag->src = *src;
 	tag->precision = -1;
-	parseflags(tag, src);
+	parseflags(tag, src, args);
 	if (tag->plused)
 		tag->spaced = 0;
 	if (tag->minused)
@@ -120,8 +125,6 @@ void			parsetag(const char **src, t_pftag *tag, va_list args)
 	tag->buffer = newbuffer(tag->padsize, tag->zeroed ? '0' : ' ');
 	tag->writer = pickwriter(tag->type);
 	tag->printer = tag->minused ? buffaddl : buffaddr;
-	if (tag->precision == -2)
-		tag->precision = (int)va_arg(args, long);
 	if (!tag->writer)
 	{
 		tag->writer = w_character;
