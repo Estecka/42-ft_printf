@@ -1,4 +1,4 @@
-SRCS = $(wildcard *.c)
+SRCS = $(wildcard *.c libft/*.c)
 
 OBJS = ${SRCS:.c=.o}
 
