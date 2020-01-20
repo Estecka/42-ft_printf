@@ -1,4 +1,17 @@
-SRCS = bufferutil.c ft_printf.c libft/character.c libft/character2.c libft/integer.c libft/integer2.c libft/list.c libft/list2.c libft/memory.c libft/memory2.c libft/put_things.c libft/put_things_fd.c libft/string.c libft/string2.c libft/string3.c tag_parser.c w_character.c w_intbase.c w_integer.c w_pointer.c w_string.c
+SRCS = ft_printf.c \
+	bufferutil.c \
+	tag_parser.c \
+	w_character.c \
+	w_intbase.c \
+	w_integer.c \
+	w_pointer.c \
+	w_string.c\
+	libft/character.c libft/character2.c \
+	libft/integer.c libft/integer2.c \
+	libft/list.c libft/list2.c \
+	libft/memory.c libft/memory2.c \
+	libft/put_things.c libft/put_things_fd.c \
+	libft/string.c libft/string2.c libft/string3.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -16,7 +29,7 @@ all: ${NAME}
 
 clean:
 	rm -f ${OBJS}
-	rm -f *.gch
+	rm -rf *.gch
 
 fclean: clean
 	rm -f ${NAME}
