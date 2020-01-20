@@ -6,19 +6,15 @@ SRCS = ft_printf.c \
 	w_integer.c \
 	w_pointer.c \
 	w_string.c\
-	libft/character.c libft/character2.c \
-	libft/integer.c libft/integer2.c \
-	libft/list.c libft/list2.c \
-	libft/memory.c libft/memory2.c \
-	libft/put_things.c libft/put_things_fd.c \
-	libft/string.c libft/string2.c libft/string3.c \
 
 OBJS = ${SRCS:.c=.o}
 
 NAME = libftprintf.a
 
+LIBFTDIR = ../libft/
+
 CC   = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I${LIBFTDIR}
 
 
 printf: ${NAME}
