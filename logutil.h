@@ -28,7 +28,8 @@
 ** # define BOOP printf("Boop\n");
 */
 
-int	ft_printfc(int colour, short boldness, const char *format, ...);
+int	ft_printfc(int colour, short boldness, const char *format, ...
+) __attribute__((format(printf,3,4)));
 int	ft_vprintfc(int colour, short boldness, const char *format,
 	va_list arguments);
 
