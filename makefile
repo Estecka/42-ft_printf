@@ -1,4 +1,5 @@
 SRCS = ft_printf.c \
+	logutil.c \
 	bufferutil.c \
 	tag_parser.c \
 	w_character.c \
